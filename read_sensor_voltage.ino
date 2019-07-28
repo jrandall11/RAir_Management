@@ -5,9 +5,11 @@
  * Outputs:
  *    Voltage
  *  
- * Reads circuit and returns voltage.
+ * Returns voltage reading from particular circuit.
  */
 
-float ReadSensorVoltage(int sensor) {
-  return analogRead(sensor) * (5.0 / 1023.0);
+float ReadSensorVoltage(int circuit) {
+
+  return analogRead(circuit) * (5.0 / 1023.0);
+  
 }

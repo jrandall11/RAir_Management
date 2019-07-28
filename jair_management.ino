@@ -24,24 +24,7 @@ void setup() {
 }
 
 void loop() {
-  // Read voltage
-  lF.sensor.voltage = ReadSensorVoltage(lF.sensor.circuit);
-  rF.sensor.voltage = ReadSensorVoltage(rF.sensor.circuit);
-  lR.sensor.voltage = ReadSensorVoltage(lR.sensor.circuit);
-  rR.sensor.voltage = ReadSensorVoltage(rR.sensor.circuit);
-
-  // Convert voltage to pressure
-  lF.sensor.pressure = (int)ReadPressureFromVoltage(lF.sensor.voltage);
-  rF.sensor.pressure = (int)ReadPressureFromVoltage(rF.sensor.voltage);
-  lR.sensor.pressure = (int)ReadPressureFromVoltage(lR.sensor.voltage);
-  rR.sensor.pressure = (int)ReadPressureFromVoltage(rR.sensor.voltage);
-
-  // Print data
-  printSensorData((char *)lF.bagName, lF.sensor.pressure);
-  printSensorData((char *)rF.bagName, rF.sensor.pressure);
-  printSensorData((char *)lR.bagName, lR.sensor.pressure);
-  printSensorData((char *)rR.bagName, rR.sensor.pressure);
-  Serial.println();
-  
+  // Get all sensor data for front and rear airbags.
+  GetPressureReadings(&front, &rear);
   delay(1000);
 }

@@ -43,15 +43,24 @@ struct PressureSensor {
 };
 
 // Air Bags
-struct Bag {
+struct AirBag {
   /* AirLift Suspension
    *  Info:
    *    Input: 0-125 psi
    *    Max supported pressure: 125 psi
    */
-  const char *bagName;
-  struct PressureSensor sensor;
-} lF {"Driver Front", {A0, 0, 0}}, 
-  rF {"Passenger Front", {A1, 0, 0}},
-  lR {"Driver Rear", {A2, 0, 0}}, 
-  rR {"Pasenger Rear", {A3, 0, 0}};
+  const char *_Name;
+  PressureSensor sensor;
+};
+
+struct Front {
+  AirBag left;
+  AirBag right;
+} front {{"Driver Front", {A0, 0, 0}}, 
+         {"Passenger Front", {A1, 0, 0}}};
+
+struct Rear {
+  AirBag left;
+  AirBag right;
+} rear {{"Driver Rear", {A2, 0, 0}}, 
+        {"Pasenger Rear", {A3, 0, 0}}};

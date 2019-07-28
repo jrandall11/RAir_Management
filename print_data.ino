@@ -1,17 +1,20 @@
 /* print_data
  * 
  * Inputs:
- *    corner name,
- *    bag pressure
+ *    Front front
+ *    Rear rear
  * Outputs:
  *    nothing
  *  
- * Takes sensor data and prints it to console.
+ * Takes sensor data for front and rear and prints it to console.
  */
 
-void printSensorData(char *cornerName, int psi) {
-  Serial.print(cornerName);
-  Serial.print(": ");
-  Serial.print(psi);
-  Serial.println(" psi");
-}
+ void PrintData(Front *front, Rear *rear) {
+  
+  PrintSensorData((char *)front->left._Name, front->left.sensor.pressure);
+  PrintSensorData((char *)front->right._Name, front->right.sensor.pressure);
+  PrintSensorData((char *)rear->left._Name, rear->left.sensor.pressure);
+  PrintSensorData((char *)rear->right._Name, rear->right.sensor.pressure);
+  Serial.println();
+  
+ }

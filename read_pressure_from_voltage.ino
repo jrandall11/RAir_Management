@@ -1,4 +1,4 @@
-/* read_pressure
+/* read_pressure_from_voltage
  * 
  * Inputs:
  *    voltage
@@ -9,6 +9,8 @@
  */
 
 float ReadPressureFromVoltage(float voltage) {
+  
   float rate = (MAX_SENSOR_PRESSURE - MIN_SENSOR_PRESSURE) / (MAX_SENSOR_VOLTAGE - MIN_SENSOR_VOLTAGE);
   return rate * (voltage - MIN_SENSOR_VOLTAGE);
+  
 }
