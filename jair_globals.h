@@ -7,6 +7,13 @@
 #define jair_globals_h
 #endif
 
+// Sensor properties
+const float MIN_SENSOR_VOLTAGE = 0.5;
+const float MAX_SENSOR_VOLTAGE = 4.5;
+const float MIN_SENSOR_PRESSURE = 0.0;
+const float MAX_SENSOR_PRESSURE = 200.0;
+
+// Sensor
 struct PressureSensor {
   /* 200 PSI eBay Pressure Sensor
    *  Info:
@@ -35,6 +42,7 @@ struct PressureSensor {
   float voltage;
 };
 
+// Air Bags
 struct Bag {
   /* AirLift Suspension
    *  Info:

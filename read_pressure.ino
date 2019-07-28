@@ -9,11 +9,6 @@
  */
 
 float ReadPressureFromVoltage(float voltage) {
-  const float sensorMinV = 0.5;
-  const float sensorMaxV = 4.5;
-  const float sensorMinP = 0.0;
-  const float sensorMaxP = 200.0;
-
-  float rate = (sensorMaxP - sensorMinP) / (sensorMaxV - sensorMinV);
-  return  (rate * voltage) - rate * sensorMinV;
+  float rate = (MAX_SENSOR_PRESSURE - MIN_SENSOR_PRESSURE) / (MAX_SENSOR_VOLTAGE - MIN_SENSOR_VOLTAGE);
+  return rate * (voltage - MIN_SENSOR_VOLTAGE);
 }
