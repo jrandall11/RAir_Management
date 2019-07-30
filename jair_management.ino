@@ -24,7 +24,7 @@ void setup() {
 }
 
 void loop() {
-  // Get all sensor data for front and rear airbags.
+  // Get all sensor pressure data for front and rear airbags.
   GetPressureReadings(&front, &rear);
   delay(1000);
 }
