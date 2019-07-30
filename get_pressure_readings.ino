@@ -15,10 +15,10 @@ void GetPressureReadings(Front *front, Rear *rear) {
   ReadSensorVoltages(front, rear);
   
   // Convert voltage to pressure
-  front->left.sensor.pressure = (int)ReadPressureFromVoltage(front->left.sensor.voltage);
-  front->right.sensor.pressure = (int)ReadPressureFromVoltage(front->right.sensor.voltage);
-  rear->left.sensor.pressure = (int)ReadPressureFromVoltage(rear->left.sensor.voltage);
-  rear->right.sensor.pressure = (int)ReadPressureFromVoltage(rear->right.sensor.voltage);
+  front->left.bag.sensor.pressure = (int)ReadPressureFromVoltage(front->left.bag.sensor.voltage);
+  front->right.bag.sensor.pressure = (int)ReadPressureFromVoltage(front->right.bag.sensor.voltage);
+  rear->left.bag.sensor.pressure = (int)ReadPressureFromVoltage(rear->left.bag.sensor.voltage);
+  rear->right.bag.sensor.pressure = (int)ReadPressureFromVoltage(rear->right.bag.sensor.voltage);
 
   // Print all sensor data
   PrintData(front, rear);

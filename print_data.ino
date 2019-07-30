@@ -11,10 +11,10 @@
 
  void PrintData(Front *front, Rear *rear) {
   
-  PrintSensorData((char *)front->left._Name, front->left.sensor.pressure);
-  PrintSensorData((char *)front->right._Name, front->right.sensor.pressure);
-  PrintSensorData((char *)rear->left._Name, rear->left.sensor.pressure);
-  PrintSensorData((char *)rear->right._Name, rear->right.sensor.pressure);
+  PrintSensorData((char *)front->left.bag._Name, front->left.bag.sensor.pressure);
+  PrintSensorData((char *)front->right.bag._Name, front->right.bag.sensor.pressure);
+  PrintSensorData((char *)rear->left.bag._Name, rear->left.bag.sensor.pressure);
+  PrintSensorData((char *)rear->right.bag._Name, rear->right.bag.sensor.pressure);
   Serial.println();
   
  }

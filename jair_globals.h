@@ -54,13 +54,21 @@ struct AirBag {
 };
 
 struct Front {
-  AirBag left;
-  AirBag right;
+  struct Left {
+    AirBag bag;
+  } left;
+  struct Right {
+    AirBag bag;
+  } right;
 } front {{"Driver Front", {A0, 0, 0}}, 
          {"Passenger Front", {A1, 0, 0}}};
 
 struct Rear {
-  AirBag left;
-  AirBag right;
+  struct Left {
+    AirBag bag;
+  } left;
+  struct Right {
+    AirBag bag;
+  } right;
 } rear {{"Driver Rear", {A2, 0, 0}}, 
         {"Pasenger Rear", {A3, 0, 0}}};
