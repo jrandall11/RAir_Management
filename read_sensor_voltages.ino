@@ -9,6 +9,8 @@
  * Reads voltage for all sensors.
  */
 
+#include "jair_globals.h"
+
 void ReadSensorVoltages(Front *front, Rear *rear) {
   
   front->left.bag.sensor.voltage  = ReadSensorVoltage(front->left.bag.sensor.circuit);

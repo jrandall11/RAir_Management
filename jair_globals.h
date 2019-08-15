@@ -7,11 +7,40 @@
 #define jair_globals_h
 #endif
 
-// Sensor properties
+// LCD
+UTFT myGLCD(ILI9341_16, 38,39,40,41);
+URTouch  myTouch( 6, 5, 4, 3, 2);
+
+// Sensor Properties
 const float MIN_SENSOR_VOLTAGE = 0.5;
 const float MAX_SENSOR_VOLTAGE = 4.5;
 const float MIN_SENSOR_PRESSURE = 0.0;
 const float MAX_SENSOR_PRESSURE = 200.0;
+
+// Air Pressure Presets
+const int PARK_FRONT_PRESSURE = 0;
+const int PARK_REAR_PRESSURE = 20;
+
+const int DRIVE_FRONT_PRESSURE = 70;
+const int DRIVE_REAR_PRESSURE = 95;
+
+const int SPORT_FRONT_PRESSURE = 60;
+const int SPORT_REAR_PRESSURE = 75;
+
+const int POTHOLE_FRONT_PRESSURE = 90;
+const int POTHOLE_REAR_PRESSURE = 110;
+
+const int MAXIMUM_FRONT_PRESSURE = 124;
+const int MAXIMUM_REAR_PRESSURE = 124;
+
+// Air Ride Mode Presets
+typedef enum {
+  park,
+  drive,
+  sport,
+  pothole,
+  maximum
+} DrivingPresets;
 
 // Sensor
 struct PressureSensor {
@@ -39,6 +68,7 @@ struct PressureSensor {
    */
   const int circuit;
   int pressure;
+  int old_pressure;
   float voltage;
 };
 
@@ -72,3 +102,14 @@ struct Rear {
   } right;
 } rear {{"Driver Rear", {A2, 0, 0}}, 
         {"Pasenger Rear", {A3, 0, 0}}};
+
+// Prototypes
+float ReadSensorVoltage(int circuit);
+void PrintSensorData(AirBag bag, int x, int y);
+void PrintData(Front *front, Rear *rear);
+float ReadSensorVoltage(int circuit);
+float ReadPressureFromVoltage(float voltage);
+void ReadSensorVoltages(Front *front, Rear *rear);
+
+
+

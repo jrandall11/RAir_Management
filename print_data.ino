@@ -9,12 +9,15 @@
  * Takes sensor data for front and rear and prints it to console.
  */
 
+#include "jair_globals.h"
+
  void PrintData(Front *front, Rear *rear) {
-  
-  PrintSensorData((char *)front->left.bag._Name,  front->left.bag.sensor.pressure);
-  PrintSensorData((char *)front->right.bag._Name, front->right.bag.sensor.pressure);
-  PrintSensorData((char *)rear->left.bag._Name,   rear->left.bag.sensor.pressure);
-  PrintSensorData((char *)rear->right.bag._Name,  rear->right.bag.sensor.pressure);
+
+  myGLCD.setColor(0xF800);
+  PrintSensorData(front->left.bag, 5, 20);
+  PrintSensorData(front->right.bag, 150, 20);
+  PrintSensorData(rear->left.bag, 5, 250);
+  PrintSensorData(rear->right.bag, 150, 250);
   Serial.println();
   
  }

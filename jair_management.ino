@@ -18,9 +18,26 @@
 */
 
 #include "jair_globals.h"
+#include <memorysaver.h>
+#include <UTFT.h>
+#include <URTouchCD.h>
+#include <URTouch.h>
+
+extern uint8_t BigFont[];
+
 
 void setup() {
   Serial.begin(9600);
+  myGLCD.InitLCD(0);
+  myGLCD.clrScr();
+  myGLCD.setBrightness(16);
+  myGLCD.setFont(BigFont);
+  myGLCD.fillScr(0xA000);
+  myGLCD.setBackColor(0xA000);
+
+  myTouch.InitTouch();
+  myTouch.setPrecision(PREC_HI);
+  
 }
 
 void loop() {

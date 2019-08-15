@@ -9,7 +9,7 @@
  */
 
 float ReadSensorVoltage(int circuit) {
-
+  
   return (analogRead(circuit) * (5.0 / 1023.0));
   
 }

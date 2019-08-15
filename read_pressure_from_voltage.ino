@@ -8,6 +8,8 @@
  * Converts voltage output from pressure sensor into psi.
  */
 
+#include "jair_globals.h"
+
 float ReadPressureFromVoltage(float voltage) {
   
   float rate = (MAX_SENSOR_PRESSURE - MIN_SENSOR_PRESSURE) / (MAX_SENSOR_VOLTAGE - MIN_SENSOR_VOLTAGE);

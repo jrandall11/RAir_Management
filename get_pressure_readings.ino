@@ -9,7 +9,15 @@
  * Obtains all pressure readings from each airbag pressure sensor.
  */
 
+#include "jair_globals.h"
+
 void GetPressureReadings(Front *front, Rear *rear) {
+  
+  // Set old pressure values
+  front->left.bag.sensor.old_pressure = front->left.bag.sensor.pressure;
+  front->right.bag.sensor.old_pressure =front->right.bag.sensor.pressure;
+  rear->left.bag.sensor.old_pressure = rear->left.bag.sensor.pressure;
+  rear->right.bag.sensor.old_pressure = rear->right.bag.sensor.pressure;
   
   // Read voltage
   ReadSensorVoltages(front, rear);
