@@ -1,6 +1,6 @@
-# jAir Management
+# RAir Management
 
-jAir Management is air management software designed to control air suspensions. This was a solution to manual air management, in an effort to design a more automated approach.
+RAir Management is air management software designed to control air suspensions. This was a solution to manual air management, in an effort to design a more automated approach.
 
 ## Installation
 
