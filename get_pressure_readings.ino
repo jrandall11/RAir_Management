@@ -8,6 +8,7 @@
  *  
  * Obtains all pressure readings from each airbag pressure sensor.
  */
+#include <RAirGlobals.h>
 
 void GetPressureReadings(Front *front, Rear *rear) {
   

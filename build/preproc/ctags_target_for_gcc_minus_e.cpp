@@ -1,35 +1,4 @@
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/jair_management.ino"
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/jair_management.ino"
-/*
-  jAir Management
-
-  A air management system for vehicle-equipped air-ride. This system aids in airing and maintaining air pressure
-  in the air system. It also provides a way to air-up or down quickly depending on user input.
-
-  The circuit:
-  * A0 - Left front airbag pressure sensor.
-  * A1 - Right front airbag pressure sensor.
-  * A2 - Left rear airbag pressure sensor.
-  * A3 - Right rear airbag pressure sensor.
-
-  Created 27 July 2019
-  By Joshua Randall
-  Modified 27 July 2019
-  By Joshua Randall
-
-*/
-
-# 21 "/Users/joshrandall/Documents/Arduino/jair_management/jair_management.ino" 2
-
-void setup() {
-  Serial.begin(9600);
-}
-
-void loop() {
-  // Get all sensor pressure data for front and rear airbags.
-  GetPressureReadings(&front, &rear);
-  delay(1000);
-}
+# 1 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino"
 # 1 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino"
 /* air_to_preset
  * 
@@ -37,6 +6,8 @@ void loop() {
  * 
  * Outputs: Signal to air controller to air up car to mode specifications.
  */
+
+# 9 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino" 2
 
  void AirToPreset(DrivingPresets preset) {
 
@@ -91,6 +62,7 @@ void loop() {
  *  
  * Obtains all pressure readings from each airbag pressure sensor.
  */
+# 12 "/Users/joshrandall/Documents/Arduino/jair_management/get_pressure_readings.ino" 2
 
 void GetPressureReadings(Front *front, Rear *rear) {
 
@@ -125,6 +97,8 @@ void GetPressureReadings(Front *front, Rear *rear) {
  * Takes sensor data for front and rear and prints it to console.
  */
 
+# 13 "/Users/joshrandall/Documents/Arduino/jair_management/print_data.ino" 2
+
  void PrintData(Front *front, Rear *rear) {
 
   PrintSensorData(front->left.bag, 5, 20);
@@ -146,6 +120,8 @@ void GetPressureReadings(Front *front, Rear *rear) {
  * Takes sensor data and prints it to console.
  */
 
+# 13 "/Users/joshrandall/Documents/Arduino/jair_management/print_sensor_data.ino" 2
+
 void PrintSensorData(AirBag bag, int x, int y) {
 
   Serial.print((char *)bag._Name);
@@ -153,6 +129,38 @@ void PrintSensorData(AirBag bag, int x, int y) {
   Serial.print(bag.sensor.pressure);
   Serial.println(" psi");
 
+}
+# 1 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino"
+/*
+  RAir Management
+
+  A air management system for vehicle-equipped air-ride. This system aids in airing and maintaining air pressure
+  in the air system. It also provides a way to air-up or down quickly depending on user input.
+
+  The circuit:
+  * A0 - Left front airbag pressure sensor.
+  * A1 - Right front airbag pressure sensor.
+  * A2 - Left rear airbag pressure sensor.
+  * A3 - Right rear airbag pressure sensor.
+
+  Created 27 July 2019
+  By Joshua Randall
+  Modified 27 July 2019
+  By Joshua Randall
+
+*/
+
+# 21 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino" 2
+# 22 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino" 2
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Get all sensor pressure data for front and rear airbags.
+  GetPressureReadings(&front, &rear);
+  delay(1000);
 }
 # 1 "/Users/joshrandall/Documents/Arduino/jair_management/read_pressure_from_voltage.ino"
 /* read_pressure_from_voltage
@@ -164,6 +172,8 @@ void PrintSensorData(AirBag bag, int x, int y) {
  *  
  * Converts voltage output from pressure sensor into psi.
  */
+
+# 12 "/Users/joshrandall/Documents/Arduino/jair_management/read_pressure_from_voltage.ino" 2
 
 float ReadPressureFromVoltage(float voltage) {
 
@@ -198,6 +208,8 @@ float ReadSensorVoltage(int circuit) {
  *  
  * Reads voltage for all sensors.
  */
+
+# 13 "/Users/joshrandall/Documents/Arduino/jair_management/read_sensor_voltages.ino" 2
 
 void ReadSensorVoltages(Front *front, Rear *rear) {
 

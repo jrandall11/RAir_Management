@@ -9,6 +9,8 @@
  * Takes sensor data for front and rear and prints it to console.
  */
 
+#include <RAirGlobals.h>
+
  void PrintData(Front *front, Rear *rear) {
   
   PrintSensorData(front->left.bag, 5, 20);

@@ -5,6 +5,8 @@
  * Outputs: Signal to air controller to air up car to mode specifications.
  */
 
+#include <RAirGlobals.h>
+
  void AirToPreset(DrivingPresets preset) {
 
   int frontPressure;

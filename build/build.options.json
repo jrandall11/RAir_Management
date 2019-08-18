@@ -6,6 +6,6 @@
   "hardwareFolders": "/Applications/Arduino.app/Contents/Java/hardware",
   "otherLibrariesFolders": "/Users/joshrandall/Documents/Arduino/libraries",
   "runtime.ide.version": "10809",
-  "sketchLocation": "/Users/joshrandall/Documents/Arduino/jair_management/jair_management.ino",
+  "sketchLocation": "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino",
   "toolsFolders": "/Applications/Arduino.app/Contents/Java/tools-builder,/Applications/Arduino.app/Contents/Java/hardware/tools/avr"
 }

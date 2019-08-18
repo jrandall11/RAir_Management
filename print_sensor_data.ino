@@ -9,6 +9,8 @@
  * Takes sensor data and prints it to console.
  */
 
+#include <RAirGlobals.h>
+
 void PrintSensorData(AirBag bag, int x, int y) {
   
   Serial.print((char *)bag._Name);

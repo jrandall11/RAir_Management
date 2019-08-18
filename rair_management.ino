@@ -1,5 +1,5 @@
 /*
-  jAir Management
+  RAir Management
 
   A air management system for vehicle-equipped air-ride. This system aids in airing and maintaining air pressure
   in the air system. It also provides a way to air-up or down quickly depending on user input.
@@ -17,7 +17,8 @@
 
 */
 
-#include <jair_globals.h>
+#include <RAirGlobals.h>
+#include <TimedAction.h>
 
 void setup() {
   Serial.begin(9600);

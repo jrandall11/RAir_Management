@@ -7,6 +7,12 @@
                 "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/**",
                 "${workspaceFolder}/**"
             ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "/Users/joshrandall/Documents/Arduino/libraries"
+                ]
+            },
             "defines": [],
             "macFrameworkPath": [
                 "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks"
