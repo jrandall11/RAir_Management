@@ -5,25 +5,45 @@
  * Outputs: Signal to air controller to air up car to mode specifications.
  */
 
-#include "jair_globals.h"
-
  void AirToPreset(DrivingPresets preset) {
-  int frontPsi;
-  int rearPsi;
+
+  int frontPressure;
+  int rearPressure;
   
   switch(preset) {
     case park:
-      frontPsi = PARK_FRONT_PRESSURE;
-      rearPsi = PARK_REAR_PRESSURE;
+      frontPressure = PARK_FRONT_PRESSURE;
+      rearPressure = PARK_REAR_PRESSURE;
       break;
     case drive:
-      frontPsi = DRIVE_FRONT_PRESSURE;
-      rearPsi = DRIVE_REAR_PRESSURE;
+      frontPressure = DRIVE_FRONT_PRESSURE;
+      rearPressure = DRIVE_REAR_PRESSURE;
       break;
     case sport:
-      frontPsi = SPORT_FRONT_PRESSURE;
-      rearPsi = SPORT_REAR_PRESSURE;
+      frontPressure = SPORT_FRONT_PRESSURE;
+      rearPressure = SPORT_REAR_PRESSURE;
+    case pothole:
+      frontPressure = POTHOLE_FRONT_PRESSURE;
+      rearPressure = POTHOLE_REAR_PRESSURE;
+    case maximum_height:
+      frontPressure = MAXIMUM_FRONT_PRESSURE;
+      rearPressure = MAXIMUM_REAR_PRESSURE;
     default:
       break;
   }
+
+  GetPressureReadings(&front, &rear);
+
+  while (front.left.bag.sensor.pressure != frontPressure && 
+         front.right.bag.sensor.pressure != frontPressure &&
+         rear.left.bag.sensor.pressure != rearPressure &&
+         rear.right.bag.sensor.pressure != rearPressure) {
+
+          if (front.left.bag.sensor.pressure < frontPressure &&
+               front.right.bag.sensor.pressure < frontPressure) {
+                 
+          }
+  }
+
+  
  }

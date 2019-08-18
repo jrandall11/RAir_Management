@@ -1,0 +1,22 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/mega"
+  },
+  {
+    "Sourcefile": "/Users/joshrandall/Documents/Arduino/jair_management/build/sketch/jair_management.ino.cpp",
+    "Include": "jair_globals.h",
+    "Includepath": "/Users/joshrandall/Documents/Arduino/libraries/JAir"
+  },
+  {
+    "Sourcefile": "/Users/joshrandall/Documents/Arduino/jair_management/build/sketch/jair_management.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]

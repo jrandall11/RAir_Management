@@ -9,8 +9,6 @@
  * Obtains all pressure readings from each airbag pressure sensor.
  */
 
-#include "jair_globals.h"
-
 void GetPressureReadings(Front *front, Rear *rear) {
   
   // Set old pressure values

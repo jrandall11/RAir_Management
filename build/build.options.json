@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "",
+  "builtInLibrariesFolders": "/Applications/Arduino.app/Contents/Java/libraries",
+  "customBuildProperties": "build.path=/Users/joshrandall/Documents/Arduino/jair_management/build,build.warn_data_percentage=75,runtime.tools.avrdude.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr,runtime.tools.avrdude-6.3.0-arduino14.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr,runtime.tools.avr-gcc.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr,runtime.tools.avr-gcc-5.4.0-atmel3.6.1-arduino2.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr,runtime.tools.arduinoOTA.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr,runtime.tools.arduinoOTA-1.2.1.path=/Applications/Arduino.app/Contents/Java/hardware/tools/avr",
+  "fqbn": "arduino:avr:mega:cpu=atmega2560",
+  "hardwareFolders": "/Applications/Arduino.app/Contents/Java/hardware",
+  "otherLibrariesFolders": "/Users/joshrandall/Documents/Arduino/libraries",
+  "runtime.ide.version": "10809",
+  "sketchLocation": "/Users/joshrandall/Documents/Arduino/jair_management/jair_management.ino",
+  "toolsFolders": "/Applications/Arduino.app/Contents/Java/tools-builder,/Applications/Arduino.app/Contents/Java/hardware/tools/avr"
+}

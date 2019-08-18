@@ -9,11 +9,8 @@
  * Takes sensor data for front and rear and prints it to console.
  */
 
-#include "jair_globals.h"
-
  void PrintData(Front *front, Rear *rear) {
-
-  myGLCD.setColor(0xF800);
+  
   PrintSensorData(front->left.bag, 5, 20);
   PrintSensorData(front->right.bag, 150, 20);
   PrintSensorData(rear->left.bag, 5, 250);
