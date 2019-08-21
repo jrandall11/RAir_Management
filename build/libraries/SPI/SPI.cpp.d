@@ -1,5 +1,6 @@
-/Users/joshrandall/Documents/Arduino/jair_management/build/sketch/air_to_p.ino.cpp.o: \
- /Users/joshrandall/Documents/Arduino/jair_management/build/sketch/air_to_p.ino.cpp \
+/Users/joshrandall/Documents/Arduino/rair_management/build/libraries/SPI/SPI.cpp.o: \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SPI/src/SPI.cpp \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SPI/src/SPI.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -10,7 +11,4 @@
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Printable.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/USBAPI.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/mega/pins_arduino.h \
- /Users/joshrandall/Documents/Arduino/libraries/RAir/RAirGlobals.h \
- /Users/joshrandall/Documents/Arduino/libraries/RAir/rAirGlobals.h \
- /Users/joshrandall/Documents/Arduino/libraries/TimedAction/TimedAction.h
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/mega/pins_arduino.h

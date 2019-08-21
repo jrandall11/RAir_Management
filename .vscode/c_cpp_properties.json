@@ -10,7 +10,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
-                    "/Users/joshrandall/Documents/Arduino/libraries"
+                    "/Users/joshrandall/Documents/Arduino/libraries",
+                    "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/"
                 ]
             },
             "defines": [],

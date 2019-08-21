@@ -1,4 +1,4 @@
-/Users/joshrandall/Documents/Arduino/jair_management/build/core/wiring_digital.c.o: \
+/Users/joshrandall/Documents/Arduino/rair_management/build/core/wiring_digital.c.o: \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/wiring_digital.c \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/wiring_private.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \

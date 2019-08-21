@@ -1,4 +1,4 @@
-/Users/joshrandall/Documents/Arduino/jair_management/build/core/main.cpp.o: \
+/Users/joshrandall/Documents/Arduino/rair_management/build/core/main.cpp.o: \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \

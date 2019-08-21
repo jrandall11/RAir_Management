@@ -1,5 +1,67 @@
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino"
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino"
+/*
+  RAir Management
+
+  A air management system for vehicle-equipped air-ride. This system aids in airing and maintaining air pressure
+  in the air system. It also provides a way to air-up or down quickly depending on user input.
+
+  The circuit:
+  * A0 - Left front airbag pressure sensor.
+  * A1 - Right front airbag pressure sensor.
+  * A2 - Left rear airbag pressure sensor.
+  * A3 - Right rear airbag pressure sensor.
+
+  Created 27 July 2019
+  By Joshua Randall
+  Modified 27 July 2019
+  By Joshua Randall
+
+*/
+
+# 21 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino" 2
+# 22 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino" 2
+# 23 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino" 2
+# 24 "/Users/joshrandall/Documents/Arduino/rair_management/rair_management.ino" 2
+
+/* Global object for FT801 Implementation */
+FT801IMPL_SPI LCD(10,8,9);
+bool success = false;
+
+void setup() {
+  Serial.begin(9600);
+  // Front valves
+  pinMode(front.left.valve.up, 0x1);
+  pinMode(front.right.valve.up, 0x1);
+  pinMode(front.left.valve.down, 0x1);
+  pinMode(front.right.valve.down, 0x1);
+  // Rear valves
+  pinMode(rear.left.valve.up, 0x1);
+  pinMode(rear.right.valve.up, 0x1);
+  pinMode(rear.left.valve.down, 0x1);
+  pinMode(rear.right.valve.down, 0x1);
+
+  /* Set the Display Enable pin*/
+ Serial.println("--Start Application--");
+ if(BootupConfigure())
+ {
+    success = true;
+ }
+   else
+ {
+  //error case - do not do any thing
+ }
+ Serial.println("--End Application--");
+}
+
+void loop() {
+  // Get all sensor pressure data for front and rear airbags.
+  if (success) {
+    getPressureThread.check();
+  }
+
+}
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/air_to_preset.ino"
 /* air_to_preset
  * 
  * Inputs: preset
@@ -7,7 +69,7 @@
  * Outputs: Signal to air controller to air up car to mode specifications.
  */
 
-# 9 "/Users/joshrandall/Documents/Arduino/jair_management/air_to_p.ino" 2
+# 9 "/Users/joshrandall/Documents/Arduino/rair_management/air_to_preset.ino" 2
 
  void AirToPreset(DrivingPresets preset) {
 
@@ -36,22 +98,120 @@
       break;
   }
 
-  GetPressureReadings(&front, &rear);
-
+  getPressureThread.setInterval(250);
+  getPressureThread.check();
   while (front.left.bag.sensor.pressure != frontPressure &&
          front.right.bag.sensor.pressure != frontPressure &&
          rear.left.bag.sensor.pressure != rearPressure &&
          rear.right.bag.sensor.pressure != rearPressure) {
 
-          if (front.left.bag.sensor.pressure < frontPressure &&
-               front.right.bag.sensor.pressure < frontPressure) {
-
+          // Adjust Front Left Pressure
+          if (front.left.bag.sensor.pressure < frontPressure) {
+            digitalWrite(front.left.valve.up, 0x1);
+            digitalWrite(front.left.valve.down, 0x0);
           }
+          else if (front.left.bag.sensor.pressure > frontPressure) {
+            digitalWrite(front.left.valve.up, 0x0);
+            digitalWrite(front.left.valve.down, 0x1);
+          }
+          else {
+            digitalWrite(front.left.valve.up, 0x0);
+            digitalWrite(front.left.valve.down, 0x0);
+          }
+
+          // Adjust Front Right Pressure
+          if (front.right.bag.sensor.pressure < frontPressure) {
+            digitalWrite(front.right.valve.up, 0x1);
+            digitalWrite(front.right.valve.down, 0x0);
+          }
+          else if (front.right.bag.sensor.pressure > frontPressure) {
+            digitalWrite(front.right.valve.up, 0x0);
+            digitalWrite(front.right.valve.down, 0x1);
+          }
+          else {
+            digitalWrite(front.right.valve.up, 0x0);
+            digitalWrite(front.right.valve.down, 0x0);
+          }
+
+          // Adjust Rear Left Pressure
+          if (rear.left.bag.sensor.pressure < rearPressure) {
+            digitalWrite(rear.left.valve.up, 0x1);
+            digitalWrite(rear.left.valve.down, 0x0);
+          }
+          else if (rear.left.bag.sensor.pressure > rearPressure) {
+            digitalWrite(rear.left.valve.up, 0x0);
+            digitalWrite(rear.left.valve.down, 0x1);
+          }
+          else {
+            digitalWrite(rear.left.valve.up, 0x0);
+            digitalWrite(rear.left.valve.down, 0x0);
+          }
+
+          // Adjust Rear Right Pressure
+          if (rear.right.bag.sensor.pressure < rearPressure) {
+            digitalWrite(rear.right.valve.up, 0x1);
+            digitalWrite(rear.right.valve.down, 0x0);
+          }
+          else if (rear.right.bag.sensor.pressure > rearPressure) {
+            digitalWrite(rear.right.valve.up, 0x0);
+            digitalWrite(rear.right.valve.down, 0x1);
+          }
+          else {
+            digitalWrite(rear.right.valve.up, 0x0);
+            digitalWrite(rear.right.valve.down, 0x0);
+          }
+
+          getPressureThread.check();
   }
-
-
+  getPressureThread.setInterval(1000);
  }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/get_pressure_readings.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/boot_config.ino"
+/* Api to bootup FT801, verify FT801 hardware and configure display/audio pins */
+/* Returns 0 in case of success and 1 in case of failure */
+int16_t BootupConfigure()
+{
+ uint32_t chipid = 0;
+ LCD.Init(1UL);//configure the display to the WQVGA
+
+ delay(20);//for safer side
+ chipid = LCD.Read32(0x0C0000UL);
+
+ /* Identify the chip */
+ if(0x00010108UL != chipid)
+ {
+  Serial.print("Error in chip id read ");
+  Serial.println(chipid,16);
+  return 0;
+ }
+
+ /* Set the Display & audio pins */
+ LCD.SetDisplayEnablePin(7);
+    LCD.SetAudioEnablePin(1);
+ LCD.DisplayOn();
+ LCD.AudioOn();
+ return 1;
+}
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/display.ino"
+/* API to display Hello World string on the screen */
+void HelloWorld()
+{
+ /* Change the below string for experimentation */
+ const char Display_string[12] = "Hello World";
+
+ /* Display list to display "Hello World" at the centre of display area */
+ LCD.DLStart();//start the display list. Note DLStart and DLEnd are helper apis, Cmd_DLStart() and Display() can also be utilized.
+ LCD.ColorRGB(0xFF,0xFF,0xFF);//set the color of the string to while color
+ LCD.Cmd_Text((480L)/*display width*//2, (272L)/*display height*//2, 29, (512 | 1024), Display_string);//display "Hello World at the center of the screen using inbuilt font handle 29 "
+ LCD.DLEnd();//end the display list
+ LCD.Finish();//render the display list and wait for the completion of the DL
+}
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/get_pressure.ino"
+# 2 "/Users/joshrandall/Documents/Arduino/rair_management/get_pressure.ino" 2
+
+void GetPressure() {
+    GetPressureReadings(&front, &rear);
+}
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/get_pressure_readings.ino"
 /* get_pressure_readings
  * 
  * Inputs:
@@ -62,7 +222,7 @@
  *  
  * Obtains all pressure readings from each airbag pressure sensor.
  */
-# 12 "/Users/joshrandall/Documents/Arduino/jair_management/get_pressure_readings.ino" 2
+# 12 "/Users/joshrandall/Documents/Arduino/rair_management/get_pressure_readings.ino" 2
 
 void GetPressureReadings(Front *front, Rear *rear) {
 
@@ -85,7 +245,7 @@ void GetPressureReadings(Front *front, Rear *rear) {
   PrintData(front, rear);
 
 }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/print_data.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/print_data.ino"
 /* print_data
  * 
  * Inputs:
@@ -97,18 +257,27 @@ void GetPressureReadings(Front *front, Rear *rear) {
  * Takes sensor data for front and rear and prints it to console.
  */
 
-# 13 "/Users/joshrandall/Documents/Arduino/jair_management/print_data.ino" 2
+# 13 "/Users/joshrandall/Documents/Arduino/rair_management/print_data.ino" 2
 
  void PrintData(Front *front, Rear *rear) {
 
-  PrintSensorData(front->left.bag, 5, 20);
-  PrintSensorData(front->right.bag, 150, 20);
-  PrintSensorData(rear->left.bag, 5, 250);
-  PrintSensorData(rear->right.bag, 150, 250);
-  Serial.println();
+  /* Display list to display "Hello World" at the centre of display area */
+    LCD.DLStart();//start the display list. Note DLStart and DLEnd are helper apis, Cmd_DLStart() and Display() can also be utilized.
+    LCD.ClearColorRGB(0x3D0000);
+    LCD.Clear();
+    LCD.ColorRGB(0xA1,0x00,0x00);//set the color of the string to while color
+
+    PrintSensorData(front->left.bag, 20, 20);
+    PrintSensorData(front->right.bag, 450, 20);
+    PrintSensorData(rear->left.bag, 20, 250);
+    PrintSensorData(rear->right.bag, 450, 250);
+    Serial.println();
+
+    LCD.DLEnd();//end the display list
+    LCD.Finish();//render the display list and wait for the completion of the DL
 
  }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/print_sensor_data.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/print_sensor_data.ino"
 /* print_sensor_data
  * 
  * Inputs:
@@ -120,49 +289,25 @@ void GetPressureReadings(Front *front, Rear *rear) {
  * Takes sensor data and prints it to console.
  */
 
-# 13 "/Users/joshrandall/Documents/Arduino/jair_management/print_sensor_data.ino" 2
+# 13 "/Users/joshrandall/Documents/Arduino/rair_management/print_sensor_data.ino" 2
 
 void PrintSensorData(AirBag bag, int x, int y) {
+
+  char pressure_buffer[4];
+  itoa(bag.sensor.pressure, pressure_buffer, 10);
 
   Serial.print((char *)bag._Name);
   Serial.print(": ");
   Serial.print(bag.sensor.pressure);
   Serial.println(" psi");
 
+  /* Change the below string for experimentation */
+ const char Display_string[12] = "Hello World";
+
+ LCD.Cmd_Text(x, y, 29, (512 | 1024), pressure_buffer);//display "Hello World at the center of the screen using inbuilt font handle 29 "
+
 }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino"
-/*
-  RAir Management
-
-  A air management system for vehicle-equipped air-ride. This system aids in airing and maintaining air pressure
-  in the air system. It also provides a way to air-up or down quickly depending on user input.
-
-  The circuit:
-  * A0 - Left front airbag pressure sensor.
-  * A1 - Right front airbag pressure sensor.
-  * A2 - Left rear airbag pressure sensor.
-  * A3 - Right rear airbag pressure sensor.
-
-  Created 27 July 2019
-  By Joshua Randall
-  Modified 27 July 2019
-  By Joshua Randall
-
-*/
-
-# 21 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino" 2
-# 22 "/Users/joshrandall/Documents/Arduino/jair_management/rair_management.ino" 2
-
-void setup() {
-  Serial.begin(9600);
-}
-
-void loop() {
-  // Get all sensor pressure data for front and rear airbags.
-  GetPressureReadings(&front, &rear);
-  delay(1000);
-}
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/read_pressure_from_voltage.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/read_pressure_from_voltage.ino"
 /* read_pressure_from_voltage
  * 
  * Inputs:
@@ -173,7 +318,7 @@ void loop() {
  * Converts voltage output from pressure sensor into psi.
  */
 
-# 12 "/Users/joshrandall/Documents/Arduino/jair_management/read_pressure_from_voltage.ino" 2
+# 12 "/Users/joshrandall/Documents/Arduino/rair_management/read_pressure_from_voltage.ino" 2
 
 float ReadPressureFromVoltage(float voltage) {
 
@@ -181,7 +326,7 @@ float ReadPressureFromVoltage(float voltage) {
   return (rate * (voltage - MIN_SENSOR_VOLTAGE));
 
 }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/read_sensor_voltage.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/read_sensor_voltage.ino"
 /* read_sensor_voltage
  * 
  * Inputs:
@@ -197,7 +342,7 @@ float ReadSensorVoltage(int circuit) {
   return (analogRead(circuit) * (5.0 / 1023.0));
 
 }
-# 1 "/Users/joshrandall/Documents/Arduino/jair_management/read_sensor_voltages.ino"
+# 1 "/Users/joshrandall/Documents/Arduino/rair_management/read_sensor_voltages.ino"
 /* read_sensor_voltages
  * 
  * Inputs:
@@ -209,7 +354,7 @@ float ReadSensorVoltage(int circuit) {
  * Reads voltage for all sensors.
  */
 
-# 13 "/Users/joshrandall/Documents/Arduino/jair_management/read_sensor_voltages.ino" 2
+# 13 "/Users/joshrandall/Documents/Arduino/rair_management/read_sensor_voltages.ino" 2
 
 void ReadSensorVoltages(Front *front, Rear *rear) {
 

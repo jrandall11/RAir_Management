@@ -17,15 +17,45 @@
 
 */
 
+#include <SPI.h>
+#include <Wire.h>
 #include <RAirGlobals.h>
-#include <TimedAction.h>
+#include "FT_NHD_43CTP_SHIELD.h"
+
+/* Global object for FT801 Implementation */
+FT801IMPL_SPI LCD(FT_CS_PIN,FT_PDN_PIN,FT_INT_PIN);
+bool success = false;
 
 void setup() {
   Serial.begin(9600);
+  // Front valves
+  pinMode(front.left.valve.up, OUTPUT);
+  pinMode(front.right.valve.up, OUTPUT);
+  pinMode(front.left.valve.down, OUTPUT);
+  pinMode(front.right.valve.down, OUTPUT);
+  // Rear valves
+  pinMode(rear.left.valve.up, OUTPUT);
+  pinMode(rear.right.valve.up, OUTPUT);
+  pinMode(rear.left.valve.down, OUTPUT);
+  pinMode(rear.right.valve.down, OUTPUT);
+
+  /* Set the Display Enable pin*/   
+	Serial.println("--Start Application--");
+	if(BootupConfigure())
+	{
+    success = true;
+	}
+  	else
+	{
+		//error case - do not do any thing
+	}
+	Serial.println("--End Application--");
 }
 
 void loop() {
   // Get all sensor pressure data for front and rear airbags.
-  GetPressureReadings(&front, &rear);
-  delay(1000);
+  if (success) {
+    getPressureThread.check();
+  }
+  
 }

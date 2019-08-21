@@ -3,5 +3,5 @@
     "configuration": "cpu=atmega2560",
     "output": "build",
     "port": "/dev/cu.usbmodemFA131",
-    "sketch": "jair_management.ino"
+    "sketch": "rair_management.ino"
 }

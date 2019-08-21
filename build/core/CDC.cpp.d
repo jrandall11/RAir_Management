@@ -1,4 +1,4 @@
-/Users/joshrandall/Documents/Arduino/jair_management/build/core/CDC.cpp.o: \
+/Users/joshrandall/Documents/Arduino/rair_management/build/core/CDC.cpp.o: \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/CDC.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/USBAPI.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
