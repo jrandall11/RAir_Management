@@ -21,6 +21,6 @@ void PrintSensorData(AirBag bag, int x, int y) {
   Serial.print(bag.sensor.pressure);
   Serial.println(" psi");
 	
-	LCD.Cmd_Text(x, y, 29, FT_OPT_CENTER, pressure_buffer);//display pressure values.
+	LCD.Cmd_Text(x, y, 25, FT_OPT_CENTER, pressure_buffer);//display pressure values.
   
 }
